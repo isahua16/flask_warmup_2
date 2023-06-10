@@ -23,7 +23,7 @@ def insert_login():
     token = uuid.uuid4().hex
     results = run_statement('call insert_login(?,?,?)', [request.json.get('username'), request.json.get('password'), token])
     if(type(results) == list and results[0][0] == 1):
-        return "User logged in"
+        return json.dumps(results, default=str)
     else:
         return "Something went wrong"
 
